@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Brew Haven - Welcome</title>
+  <link rel="stylesheet" href="index.css">
+
+  
+</head>
+<body>
+
+  <div id="video-cover">
+    <video 
+      id="coverVideo" 
+      autoplay 
+      muted 
+      playsinline 
+      webkit-playsinline 
+      loop 
+      preload="auto"
+      poster="pract2 images/cover.jpg">
+      <source src="pract2 images/intro.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <form id="nameForm">
+    <label for="nameInput"><strong>Welcome to Brew Haven </strong><br>Please enter your name to continue:</label><br><br>
+    <input type="text" id="nameInput" name="name" placeholder="Your Name" required />
+    <button type="submit">Enter Brew Haven</button>
+    <p id="message"></p>
+  </form>
+
+  <script>
+    const video = document.getElementById('coverVideo');
+    const form = document.getElementById('nameForm');
+    const nameInput = document.getElementById('nameInput');
+    const message = document.getElementById('message');
+
+    // Try to play video on load
+    video.play().catch(() => {
+      // If autoplay fails, play on first user interaction
+      const startVideoOnInteraction = () => {
+        video.play();
+        window.removeEventListener('touchstart', startVideoOnInteraction);
+        window.removeEventListener('click', startVideoOnInteraction);
+      };
+      window.addEventListener('touchstart', startVideoOnInteraction);
+      window.addEventListener('click', startVideoOnInteraction);
+    });
+
+    function isValidName(name) {
+      return /^[a-zA-Z\s]+$/.test(name);
+    }
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      const nameValue = nameInput.value.trim();
+
+      if (nameValue === '') {
+        message.textContent = "Please enter your name.";
+        message.style.color = 'red';
+      } else if (!isValidName(nameValue)) {
+        message.textContent = "Invalid input! Use letters and spaces only.";
+        message.style.color = 'red';
+      } else {
+        message.textContent = `Welcome, ${nameValue}!`;
+        message.style.color = 'green';
+
+        localStorage.setItem('userName', nameValue);
+
+        setTimeout(() => {
+          window.location.href = "second.html"; // Change to your main page URL
+        }, 1500);
+      }
+    });
+  </script>
+
+</body>
+</html>

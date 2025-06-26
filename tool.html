@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Multi-Tool Calculator</title>
+<head>
+  <link rel="stylesheet" href="tool.css">
+    
+</head>
+<body>
+
+  <h1>Multi-Tool Calculator</h1>
+
+  <label for="toolSelect">Choose a calculator tool:</label>
+  <select id="toolSelect" aria-label="Select calculator tool" onchange="showCalculator()">
+    <option value="">-- Select a tool --</option>
+    <option value="yearlyInterest">Yearly Interest Calculator</option>
+    <option value="monthlyInterest">Monthly Interest Calculator</option>
+    <option value="usdToPeso">USD to PHP Converter</option>
+  </select>
+
+  <!-- Yearly Interest Calculator -->
+  <section id="yearlyInterest" class="calculator" role="region" aria-live="polite" aria-label="Yearly Interest Calculator">
+    <h2>Yearly Interest Calculator</h2>
+    <input type="number" id="principalY" placeholder="Principal Amount (e.g. 1000)" min="0" step="any" />
+    <input type="number" id="rateY" placeholder="Annual Interest Rate (%)" min="0" step="any" />
+    <input type="number" id="yearsY" placeholder="Years" min="0" step="any" />
+    <button onclick="calculateYearlyInterest()">Calculate Interest</button>
+    <div id="resultY" class="result" aria-live="assertive"></div>
+  </section>
+
+  <!-- Monthly Interest Calculator -->
+  <section id="monthlyInterest" class="calculator" role="region" aria-live="polite" aria-label="Monthly Interest Calculator">
+    <h2>Monthly Interest Calculator</h2>
+    <input type="number" id="principalM" placeholder="Principal Amount" min="0" step="any" />
+    <input type="number" id="rateM" placeholder="Annual Interest Rate (%)" min="0" step="any" />
+    <input type="number" id="monthsM" placeholder="Number of Months" min="0" step="any" />
+    <button onclick="calculateMonthlyInterest()">Calculate Interest</button>
+    <div id="resultM" class="result" aria-live="assertive"></div>
+  </section>
+
+  <!-- USD to PHP Converter -->
+  <section id="usdToPeso" class="calculator" role="region" aria-live="polite" aria-label="USD to PHP Currency Converter">
+    <h2>USD to PHP Converter</h2>
+    <input type="number" id="usdAmount" placeholder="Amount in USD" min="0" step="any" />
+    <input type="number" id="exchangeRate" placeholder="Exchange Rate (e.g. 56)" min="0" step="any" />
+    <button onclick="convertToPeso()">Convert</button>
+    <div id="resultPHP" class="result" aria-live="assertive"></div>
+  </section>
+
+<script>
+  function showCalculator() {
+    const selected = document.getElementById('toolSelect').value;
+    const calculators = document.querySelectorAll('.calculator');
+    calculators.forEach(calc => {
+      calc.classList.remove('active');
+      calc.style.opacity = '0';
+      calc.style.transform = 'translateY(15px)';
+    });
+    if (selected) {
+      const el = document.getElementById(selected);
+      el.classList.add('active');
+      el.style.opacity = '1';
+      el.style.transform = 'translateY(0)';
+    }
+  }
+
+  function calculateYearlyInterest() {
+    const principal = parseFloat(document.getElementById('principalY').value);
+    const rate = parseFloat(document.getElementById('rateY').value);
+    const years = parseFloat(document.getElementById('yearsY').value);
+    if (isNaN(principal) || isNaN(rate) || isNaN(years) || principal < 0 || rate < 0 || years < 0) {
+      alert('Please fill in all fields with valid positive numbers');
+      return;
+    }
+    const interest = principal * (rate / 100) * years;
+    const total = principal + interest;
+    document.getElementById('resultY').innerText =
+      `Interest: $${interest.toFixed(2)} | Total: $${total.toFixed(2)}`;
+  }
+
+  function calculateMonthlyInterest() {
+    const principal = parseFloat(document.getElementById('principalM').value);
+    const annualRate = parseFloat(document.getElementById('rateM').value);
+    const months = parseFloat(document.getElementById('monthsM').value);
+    if (isNaN(principal) || isNaN(annualRate) || isNaN(months) || principal < 0 || annualRate < 0 || months < 0) {
+      alert('Please fill in all fields with valid positive numbers');
+      return;
+    }
+    const monthlyRate = annualRate / 12 / 100;
+    const interest = principal * monthlyRate * months;
+    const total = principal + interest;
+    document.getElementById('resultM').innerText =
+      `Interest: $${interest.toFixed(2)} | Total: $${total.toFixed(2)}`;
+  }
+
+  function convertToPeso() {
+    const usd = parseFloat(document.getElementById('usdAmount').value);
+    const rate = parseFloat(document.getElementById('exchangeRate').value);
+    if (isNaN(usd) || isNaN(rate) || usd < 0 || rate < 0) {
+      alert('Please fill in all fields with valid positive numbers');
+      return;
+    }
+    const php = usd * rate;
+    document.getElementById('resultPHP').innerText =
+      `$${usd.toFixed(2)} = ₱${php.toFixed(2)}`;
+  }
+</script>
+
+</body>
+</html>

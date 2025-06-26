@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Brewed Website Expanded</title>
+    <!-- CSS Link -->
+    <link rel="stylesheet" href="second.css" />
+    <!-- Box Icon Link for Icons -->
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Header & Navbar Section -->
+    <header>
+      <nav>
+        <div class="nav_logo">
+          <a href="#">
+            <img src="https://www.shutterstock.com/image-illustration/coffee-logo-design-black-background-260nw-2313489393.jpg" alt="Coffee Logo" />
+            <h2 id="brew">Brew Haven</h2>
+          </a>
+        </div>
+
+        <input type="checkbox" id="click" />
+        <label for="click">
+          <i class="menu_btn bx bx-menu"></i>
+          <i class="close_btn bx bx-x"></i>
+        </label>
+
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#service">Services</a></li>
+          <li><a href="#why">Why Us</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero_section">
+      <div class="section_container">
+        <div class="hero_container">
+          <div class="text_section">
+            <h2>Brewed for Dreamers, Crafted for Doers</h2>
+            <h3>Where Every Cup is a Little Bit of Magic</h3>
+            <p>
+              Step into our coffee haven—where every bean has a tale to tell, and every cup sparks pure delight.
+            </p>
+
+            <div class="hero_section_button">
+              <a href="menu.html" class="button">Order Online</a>
+  <a href="tool.html" class="button">More Tools</a>
+            
+            </div>
+          </div>
+
+          <div class="image_section styled-image" onclick="spinImage(this)">
+            <img src="pract2 images/cokicofe.jpg" alt="Coffee" />
+          </div>
+          
+          
+        </div>
+      </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section class="about_us" id="about">
+      <div class="section_container">
+        <div class="about_container">
+          <div class="text_section">
+            <h2 class="section_title">About Us</h2>
+            <p>At Coffee Home, we believe that coffee is more than just a drink—it’s an experience. Nestled in the heart of Calatrava, Negros Occidental, Philippines, we have created a cozy and inviting space where coffee lovers can unwind, connect, and savor the perfect cup.
+
+              Our goal is to offer an authentic coffee experience in a warm and welcoming atmosphere. Whether you're here for a morning pick-me-up, a casual conversation, or a moment of peace, our carefully crafted brews and comfortable ambiance make Coffee Home your go-to coffee spot.
+              
+              Step in, take a seat, and let the aroma of freshly brewed coffee make you feel right at home. ☕✨
+              
+              
+
+
+            </p>
+          </div>
+
+          <div class="image_section elegant-ice" onclick="spinIce(this)">
+            <img src="pract2 images/ice.png" alt="coffee" />
+            <div class="steam"></div>
+            <div class="sparkle"></div>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+   <!-- Services Section -->
+<section class="services" id="service">
+  <h2 class="section_title">Our Services</h2>
+  <div class="section_container">
+    <div class="service_container">
+      <div class="services_items">
+        <a href="menu.html?item=ice-coffee">
+          <img src="pract2 images/iced-coffee-with-cream-drink.jpg" alt="Ice coffee" />
+        </a>
+        <div class="services_text">
+          <h3>Ice Coffee</h3>
+          <p>A refreshing range of chilled iced coffees to keep you cool and energized.</p>
+        </div>
+      </div>
+
+      <div class="services_items">
+        <a href="menu.html?item=mocha">
+          <img src="pract2 images/mocha.jpg" alt="Mocha Coffee" />
+        </a>
+        <div class="services_text">
+          <h3>Mocha Coffe</h3>
+          <p>A perfect blend of coffee and chocolate, crafted to satisfy your cravings.</p>
+        </div>
+      </div>
+
+      <div class="services_items">
+        <a href="menu.html?item=cappuccino">
+          <img src="pract2 images/capucino.avif" alt="Cappuccino" />
+        </a>
+        <div class="services_text">
+          <h3>Cappucino</h3>
+          <p>A rich, frothy cappuccino to lift your mood with every sip</p>
+        </div>
+      </div>
+
+      <div class="services_items">
+        <a href="menu.html?item=macchiato">
+          <img src="pract2 images/Maciato.jpg" alt="Macchiato" />
+        </a>
+        <div class="services_text">
+          <h3>Machiato</h3>
+          <p>Bold espresso with a touch of creamy froth—pure perfection in every sip.</p>
+        </div>
+      </div>
+
+      <div class="services_items">
+        <a href="menu.html?item=flat-white">
+          <img src="pract2 images/flat-white.jpg" alt="Flat White Coffee" />
+        </a>
+        <div class="services_text">
+          <h3>Flat White Coffee w/ Burger</h3>
+          <p>A creamy and bold Flat White w/ burger, crafted for true coffee lovers.</p>
+        </div>
+      </div>
+
+      <div class="services_items">
+        <a href="menu.html?item=americano">
+          <img src="pract2 images/amerkano.jpg" alt="Americano Coffee" />
+        </a>
+        <div class="services_text">
+          <h3>Americano Coffee</h3>
+          <p>Bold, smooth, and perfectly balanced—pure espresso softened with hot water.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    <!-- Why Us Section -->
+    <section class="why_us" id="why">
+      <h2 class="section_title">Why Us?</h2>
+      <div class="section_container">
+        <div class="why_container">
+          <div class="why_items">
+            <img src="pract2 images/delicious.png" alt="Delicious" />
+            <div class="why_us_text">
+              <h3>Delicious Food, Unforgettable Taste</h3>
+              <p>
+                A spread of mouthwatering delights, crafted to satisfy your cravings and elevate your dining experience.
+              </p>
+            </div>
+          </div>
+          <div class="why_items">
+            <img src="pract2 images/pleasant.png" alt="Pleasant" />
+            <div class="why_us_text">
+              <h3>A Warm Welcome, A Perfect Atmosphere</h3>
+              <p>
+                Step into a haven of comfort and elegance—where every moment is special, and every meal is an experience to cherish
+              </p>
+            </div>
+          </div>
+          <div class="why_items">
+            <img src="pract2 images/hospitality.png" alt="Hospitality" />
+            <div class="why_us_text">
+              <h3>Hospitality from the Heart</h3>
+              <p>
+                Our friendly staff is always ready to serve with a smile, going the extra mile to make every visit warm and memorable.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+      <h2 class="section_title">Gallery</h2>
+      <div class="section_container">
+        <div class="gallery_container">
+          <div class="gallery_items">
+            <img src="https://static.vecteezy.com/system/resources/thumbnails/030/166/747/small_2x/the-best-coffee-shops-in-the-world-ai-generated-photo.jpg" alt="Gallery Image" />
+          </div>
+          <div class="gallery_items">
+            <img src="https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,h_750,q_75,w_1000/v1/clients/napavalley/Gott_s_Roadside_Napa_CAPTION_Order_up_Ask_for_Gott_s_Double_Cheeseburger_with_a_shake__aeb3eef3-9dbd-42ec-8e14-c2f4bb09d882.jpg" alt="Gallery Image" />
+          </div>
+          <div class="gallery_items">
+            <img src="https://media.istockphoto.com/id/1150728025/photo/grilled-sandwich-with-a-cappuccino.jpg?s=612x612&w=0&k=20&c=z1ucG3nVZOTTGqgJ1G4NrhzvlYkhmztiobR1kS13MlI=" alt="Gallery Image" />
+          </div>
+          <div class="gallery_items">
+            <img src="https://static.vecteezy.com/system/resources/thumbnails/053/515/794/small_2x/grilled-sandwich-and-coffee-on-white-wooden-table-photo.jpeg" alt="Gallery Image" />
+          </div>
+          <div class="gallery_items">
+            <img src="https://static.vecteezy.com/system/resources/thumbnails/046/608/118/small/a-coffee-and-sandwiches-on-morning-breakfast-photo.jpeg" alt="Gallery Image" />
+          </div>
+          <div class="gallery_items">
+            <img src="https://img.freepik.com/free-photo/side-view-tuna-sandwich-white-bread-with-tomato-tuna-cucumber-lettuce-coffee-beans-table_141793-5148.jpg" alt="Gallery Image" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+      <h2 class="section_title">Contact Us</h2>
+      <div class="section_container">
+        <div class="contact_container">
+          <div class="contact_form">
+            <form action="#">
+              <div class="field">
+                <label for="Name">Full Name</label>
+                <input type="text" id="Name" placeholder="Your Name" required />
+              </div>
+              <div class="field">
+                <label for="email">Your Email</label>
+                <input
+                  type="text"
+                  id="email"
+                  placeholder="Your Email"
+                  required
+                />
+              </div>
+              <div class="field">
+                <label for="number">Your Number</label>
+                <input
+                  type="number"
+                  id="number"
+                  placeholder="Your Contact Number"
+                  required
+                />
+              </div>
+              <div class="field">
+                <label for="textarea">Textarea</label>
+                <textarea
+                  name="textarea"
+                  id="textarea"
+                  placeholder="Your Message"
+                ></textarea>
+              </div>
+
+              <button class="button" id="submit">Submit</button>
+            </form>
+          </div>
+
+          <div class="contact_text">
+            <div class="contact_items">
+              <i class="bx bx-current-location"></i>
+              <div class="contact_details">
+                <h3>Our Location</h3>
+                <p>Caltarva Negros Occidental, Philippines</p>
+              </div>
+            </div>
+            <div class="contact_items">
+              <i class="bx bxs-envelope"></i>
+              <div class="contact_details">
+                <h3>General Enquries</h3>
+                <p>brewhaven@xyz.com</p>
+              </div>
+            </div>
+            <div class="contact_items">
+              <i class="bx bxs-phone-call"></i>
+              <div class="contact_details">
+                <h3>Call Us</h3>
+                <p>+6392242099</p>
+              </div>
+            </div>
+            <div class="contact_items">
+              <i class="bx bxs-time-five"></i>
+              <div class="contact_details">
+                <h3>Our Time</h3>
+                <p>Mon-Sun : 10:00 AM - 7:00 PM</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+      <div class="section_container">
+        <div class="footer_section">
+          <div class="footer_logo">
+            <a href="index.html">
+              <img src="https://www.shutterstock.com/image-illustration/coffee-logo-design-black-background-260nw-2313489393.jpg" alt="Coffee Logo" />
+              <h2>Brew Haven</h2>
+            </a>
+          </div>
+
+          <div class="useful_links">
+            <h3>Useful Links</h3>
+            <ul>
+              <li><a href="#about">About</a></li>
+              <li><a href="#service">Services</a></li>
+              <li><a href="#why">Why Us</a></li>
+              <li><a href="#gallery">Gallery</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </div>
+
+          <div class="contact_us">
+            <h3>Contact</h3>
+            <ul>
+              <li>
+                <i class="bx bx-current-location"></i>
+                <span>Caltarva Negros Occidental, Philippines</span>
+              </li>
+              <li>
+                <i class="bx bxs-phone-call"></i> <span>+01 92728239</span>
+              </li>
+              <li>
+                <i class="bx bxs-time-five"></i>
+                <span>Mon-Sun : 10:00 AM - 7:00 PM</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="follow_us">
+            <h3>Follow</h3>
+            <i class="bx bxl-facebook-circle"></i>
+            <i class="bx bxl-twitter"></i>
+            <i class="bx bxl-instagram-alt"></i>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script>
+    function spinImage(element) {
+      element.classList.add('spin');
+    
+      setTimeout(() => {
+        element.classList.remove('spin');
+      }, 1000); // match the duration of the animation
+    }
+
+    function spinIce(element) {
+  element.classList.add("spin");
+  setTimeout(() => {
+    element.classList.remove("spin");
+  }, 1000);
+}
+
+  </script>
+  </body>
+</html>

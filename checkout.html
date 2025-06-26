@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Elegant Checkout Page</title>
+  <link rel="stylesheet"  href="checkout.css">
+</head>
+<body>
+
+  <h1>Checkout</h1>
+
+  <div class="order-summary">
+    <h2>Your Order</h2>
+    <ul id="orderList"></ul>
+    <p><strong>Total:</strong> $<span id="total">0.00</span></p>
+  </div>
+
+  <div class="form-group">
+    <label for="name">Full Name:</label>
+    <input type="text" id="name" required />
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email:</label>
+    <input type="email" id="email" required />
+  </div>
+
+  <div class="form-group">
+    <label for="address">Delivery Address:</label>
+    <textarea id="address" rows="3" required></textarea>
+  </div>
+
+  <!-- Enhanced Payment Section -->
+  <div class="form-group">
+    <label for="payment">Choose Payment Method:</label>
+    <div class="payment-options" id="paymentCards">
+      <div class="payment-card selected" data-value="COD">
+        <input type="radio" name="payment" value="COD" checked hidden />
+        <strong>Cash on Delivery</strong>
+        <p>Pay when your coffee is delivered.</p>
+      </div>
+
+      <div class="payment-card" data-value="Online">
+        <input type="radio" name="payment" value="Online" hidden />
+        <strong>Online Payment</strong>
+        <p>Pay now using GCash or PayPal.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group" id="onlineOptions" style="display: none;">
+    <label for="gateway">Select Payment Gateway:</label>
+    <select id="gateway">
+      <option value="GCash">GCash</option>
+      <option value="PayPal">PayPal</option>
+    </select>
+
+    <div id="gcashQR" style="display: none;">
+      <p>Scan to pay with GCash:</p>
+      <img src="images/gcash-qr.png" alt="GCash QR Code" />
+    </div>
+
+    <div id="paypalBtn" style="display: none;">
+      <p>Click below to pay via PayPal:</p>
+      <a href="#">
+        <img
+          src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-large.png"
+          alt="Pay with PayPal"
+        />
+      </a>
+    </div>
+  </div>
+
+  <button id="confirmBtn">Confirm Order</button>
+
+  <div id="thankYou">
+    <p>Thank you for your order, <span id="userName"></span>!</p>
+    <p>
+      Your payment method: <strong><span id="paymentType"></span></strong>
+    </p>
+    <p>We'll deliver your coffee soon ☕</p>
+  </div>
+
+  <!-- Toast notification container -->
+  <div id="toast" class="toast">Order confirmed!</div>
+
+  <script>
+    const orderList = document.getElementById('orderList');
+    const totalDisplay = document.getElementById('total');
+    const confirmBtn = document.getElementById('confirmBtn');
+    const thankYou = document.getElementById('thankYou');
+    const userName = document.getElementById('userName');
+    const paymentType = document.getElementById('paymentType');
+
+    const onlineOptions = document.getElementById('onlineOptions');
+    const gatewaySelect = document.getElementById('gateway');
+    const gcashQR = document.getElementById('gcashQR');
+    const paypalBtn = document.getElementById('paypalBtn');
+
+    const orderData = JSON.parse(localStorage.getItem('orderData')) || {};
+    let total = 0;
+
+    for (const id in orderData) {
+      const item = orderData[id];
+      if (item.quantity > 0) {
+        const li = document.createElement('li');
+        li.textContent = `${item.name} x ${item.quantity} = $${(item.price * item.quantity).toFixed(2)}`;
+        orderList.appendChild(li);
+        total += item.price * item.quantity;
+      }
+    }
+
+    totalDisplay.textContent = total.toFixed(2);
+
+    // Enhance payment card selection
+    const paymentCards = document.querySelectorAll('.payment-card');
+
+    paymentCards.forEach((card) => {
+      card.addEventListener('click', () => {
+        paymentCards.forEach((c) => c.classList.remove('selected'));
+        card.classList.add('selected');
+        card.querySelector('input').checked = true;
+
+        const selectedValue = card.dataset.value;
+        const isOnline = selectedValue === 'Online';
+        onlineOptions.style.display = isOnline ? 'block' : 'none';
+        gcashQR.style.display = 'none';
+        paypalBtn.style.display = 'none';
+      });
+    });
+
+    gatewaySelect.addEventListener('change', () => {
+      gcashQR.style.display = gatewaySelect.value === 'GCash' ? 'block' : 'none';
+      paypalBtn.style.display = gatewaySelect.value === 'PayPal' ? 'block' : 'none';
+    });
+
+    // Toast helper function
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3000); // Toast visible for 3 seconds
+    }
+
+    confirmBtn.addEventListener('click', () => {
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const address = document.getElementById('address').value.trim();
+      const selectedPayment = document.querySelector('input[name="payment"]:checked').value;
+      const selectedGateway = gatewaySelect.value;
+
+      if (!name || !email || !address) {
+        alert('Please fill in all fields.');
+        return;
+      }
+
+      confirmBtn.style.display = 'none';
+      thankYou.style.display = 'block';
+      userName.textContent = name;
+      paymentType.textContent = selectedPayment === 'Online' ? `${selectedGateway} (Online)` : 'Cash on Delivery';
+
+      localStorage.removeItem('orderData');
+
+      // Show toast notification here
+      showToast('✅ Order confirmed! Thank you for your purchase.');
+    });
+  </script>
+</body>
+</html>

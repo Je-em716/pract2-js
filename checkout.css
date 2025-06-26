@@ -1,0 +1,209 @@
+
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 30px 20px;
+    background: linear-gradient(to bottom right, #f8f9fa, #e0f7fa);
+    max-width: 700px;
+    margin: auto;
+    color: #333;
+  }
+
+  h1, h2 {
+    text-align: center;
+    color: #00796b;
+    margin-bottom: 20px;
+  }
+
+  .order-summary {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    padding: 20px;
+    margin-bottom: 30px;
+  }
+
+  ul {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  ul li {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 6px;
+    color: #004d40;
+  }
+
+  input, textarea, select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 2px solid #b2dfdb;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  input:focus, textarea:focus, select:focus {
+    border-color: #00796b;
+    box-shadow: 0 0 8px rgba(0,121,107,0.3);
+    outline: none;
+  }
+
+  .payment-options {
+    display: flex;
+    gap: 15px;
+    flex-direction: column;
+  }
+
+  .card {
+    background: #fff;
+    border-radius: 10px;
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
+    padding: 15px; /* moved padding here */
+  }
+  
+  .card-content {
+    padding: 0; /* removed */
+  }
+  
+  .payment-card {
+    padding: 15px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #fff;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+  }
+
+  .payment-card:hover {
+    border-color: #00796b;
+  }
+
+  .payment-card.selected {
+    border-color: #00796b;
+    background-color: #e0f2f1;
+  }
+
+  button {
+    background-color: #00796b;
+    color: white;
+    padding: 14px;
+    font-size: 1.1rem;
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 5px 12px rgba(0,121,107,0.3);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  button:hover {
+    background-color: #004d40;
+    box-shadow: 0 8px 18px rgba(0,77,64,0.4);
+  }
+
+  #thankYou {
+    display: none;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #2e7d32;
+    margin-top: 30px;
+    background: #e8f5e9;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: inset 0 0 10px rgba(76, 175, 80, 0.15);
+  }
+
+  #gcashQR img {
+    width: 200px;
+    border-radius: 10px;
+    margin-top: 10px;
+    border: 2px solid #ccc;
+  }
+
+  #gcashQR, #paypalBtn {
+    text-align: center;
+    margin-top: 15px;
+  }
+
+  #paypalBtn img {
+    max-width: 220px;
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  #paypalBtn img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+  }
+
+  @media (max-width: 600px) {
+    body {
+      padding: 20px 10px;
+    }
+  }
+
+  /* Your existing CSS ... */
+
+@media (max-width: 600px) {
+  .menu-container {
+    padding: 0 5px;
+  }
+  .card {
+    width: 90vw;
+    max-width: none;
+    padding: 10px;
+  }
+  .card img {
+    height: 150px;
+  }
+  .lightbox-content {
+    max-width: 95vw;
+    max-height: 70vh;
+  }
+  .order-summary {
+    width: 90vw;
+    margin: 20px auto;
+  }
+}
+
+/* Toast notification styles */
+.toast {
+  visibility: hidden;
+  min-width: 250px;
+  background-color: #4BB543; /* green */
+  color: white;
+  text-align: center;
+  border-radius: 4px;
+  padding: 16px;
+  position: fixed;
+  z-index: 9999;
+  left: 50%;
+  bottom: 30px;
+  font-size: 17px;
+  transform: translateX(-50%);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.toast.show {
+  visibility: visible;
+  opacity: 1;
+}

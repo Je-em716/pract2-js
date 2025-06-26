@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Multi-Tool Calculator</title>
+  <style>
+    /* Reset and base */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 30px 20px;
+      background: linear-gradient(135deg, #e0f7fa, #80deea);
+      max-width: 480px;
+      margin: 50px auto;
+      color: #333;
+      user-select: none;
+    }
+
+    h1 {
+      text-align: center;
+      font-weight: 800;
+      color: #00796b;
+      margin-bottom: 25px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+      font-size: 2.4rem;
+      letter-spacing: 1.2px;
+    }
+
+    label {
+      font-weight: 700;
+      color: #004d40;
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1rem;
+      letter-spacing: 0.03em;
+    }
+
+    select {
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 2px solid #b2dfdb;
+      font-size: 1rem;
+      width: 100%;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+    select:hover, select:focus {
+      border-color: #00796b;
+      box-shadow: 0 0 8px rgba(0,121,107,0.3);
+      outline: none;
+    }
+
+    .calculator {
+      background: #fff;
+      padding: 30px 28px;
+      margin-top: 30px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      display: none;
+      transition: opacity 0.4s ease, transform 0.3s ease;
+    }
+    .calculator.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .calculator h2 {
+      margin-bottom: 18px;
+      font-size: 1.8rem;
+      color: #004d40;
+      border-bottom: 2px solid #b2dfdb;
+      padding-bottom: 8px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 14px 18px;
+      font-size: 1rem;
+      border-radius: 12px;
+      border: 2px solid #b2dfdb;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    input[type="number"]:focus {
+      border-color: #00796b;
+      box-shadow: 0 0 10px rgba(0,121,107,0.35);
+      outline: none;
+    }
+
+    button {
+      margin-top: 15px;
+      width: 100%;
+      padding: 15px 0;
+      font-size: 1.1rem;
+      background-color: #00796b;
+      border: none;
+      border-radius: 14px;
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(0,121,107,0.4);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      letter-spacing: 0.05em;
+      user-select: none;
+    }
+    button:hover, button:focus {
+      background-color: #004d40;
+      box-shadow: 0 8px 25px rgba(0,77,64,0.6);
+      outline: none;
+    }
+
+    .result {
+      margin-top: 18px;
+      font-weight: 700;
+      font-size: 1.2rem;
+      padding: 15px 18px;
+      background-color: #b2dfdb;
+      color: #004d40;
+      border-radius: 12px;
+      box-shadow: inset 0 0 15px rgba(0,121,107,0.2);
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: text;
+      letter-spacing: 0.02em;
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 500px) {
+      body {
+        padding: 20px 10px;
+      }
+      .calculator {
+        padding: 24px 20px;
+      }
+      h1 {
+        font-size: 2rem;
+      }
+      .calculator h2 {
+        font-size: 1.5rem;
+      }
+      button {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Multi-Tool Calculator</h1>
+
+  <label for="toolSelect">Choose a calculator tool:</label>
+  <select id="toolSelect" aria-label="Select calculator tool" onchange="showCalculator()">
+    <option value="">-- Select a tool --</option>
+    <option value="yearlyInterest">Yearly Interest Calculator</option>
+    <option value="monthlyInterest">Monthly Interest Calculator</option>
+    <option value="usdToPeso">USD to PHP Converter</option>
+  </select>
+
+  <!-- Yearly Interest Calculator -->
+  <section id="yearlyInterest" class="calculator" role="region" aria-live="polite" aria-label="Yearly Interest Calculator">
+    <h2>Yearly Interest Calculator</h2>
+    <input type="number" id="principalY" placeholder="Principal Amount (e.g. 1000)" min="0" step="any" />
+    <input type="number" id="rateY" placeholder="Annual Interest Rate (%)" min="0" step="any" />
+    <input type="number" id="yearsY" placeholder="Years" min="0" step="any" />
+    <button onclick="calculateYearlyInterest()">Calculate Interest</button>
+    <div id="resultY" class="result" aria-live="assertive"></div>
+  </section>
+
+  <!-- Monthly Interest Calculator -->
+  <section id="monthlyInterest" class="calculator" role="region" aria-live="polite" aria-label="Monthly Interest Calculator">
+    <h2>Monthly Interest Calculator</h2>
+    <input type="number" id="principalM" placeholder="Principal Amount" min="0" step="any" />
+    <input type="number" id="rateM" placeholder="Annual Interest Rate (%)" min="0" step="any" />
+    <input type="number" id="monthsM" placeholder="Number of Months" min="0" step="any" />
+    <button onclick="calculateMonthlyInterest()">Calculate Interest</button>
+    <div id="resultM" class="result" aria-live="assertive"></div>
+  </section>
+
+  <!-- USD to PHP Converter -->
+  <section id="usdToPeso" class="calculator" role="region" aria-live="polite" aria-label="USD to PHP Currency Converter">
+    <h2>USD to PHP Converter</h2>
+    <input type="number" id="usdAmount" placeholder="Amount in USD" min="0" step="any" />
+    <input type="number" id="exchangeRate" placeholder="Exchange Rate (e.g. 56)" min="0" step="any" />
+    <button onclick="convertToPeso()">Convert</button>
+    <div id="resultPHP" class="result" aria-live="assertive"></div>
+  </section>
+
+<script>
+  function showCalculator() {
+    const selected = document.getElementById('toolSelect').value;
+    const calculators = document.querySelectorAll('.calculator');
+    calculators.forEach(calc => {
+      calc.classList.remove('active');
+      calc.style.opacity = '0';
+      calc.style.transform = 'translateY(15px)';
+    });
+    if (selected) {
+      const el = document.getElementById(selected);
+      el.classList.add('active');
+      el.style.opacity = '1';
+      el.style.transform = 'translateY(0)';
+    }
+  }
+
+  function calculateYearlyInterest() {
+    const principal = parseFloat(document.getElementById('principalY').value);
+    const rate = parseFloat(document.getElementById('rateY').value);
+    const years = parseFloat(document.getElementById('yearsY').value);
+    if (isNaN(principal) || isNaN(rate) || isNaN(years) || principal < 0 || rate < 0 || years < 0) {
+      alert('Please fill in all fields with valid positive numbers');
+      return;
+    }
+    const interest = principal * (rate / 100) * years;
+    const total = principal + interest;
+    document.getElementById('resultY').innerText =
+      `Interest: $${interest.toFixed(2)} | Total: $${total.toFixed(2)}`;
+  }
+
+  function calculateMonthlyInterest() {
+    const principal = parseFloat(document.getElementById('principalM').value);
+    const annualRate = parseFloat(document.getElementById('rateM').value);
+    const months = parseFloat(document.getElementById('monthsM').value);
+    if (isNaN(principal) || isNaN(annualRate) || isNaN(months) || principal < 0 || annualRate < 0 || months < 0) {
+      alert('Please fill in all fields with valid positive numbers');
+      return;
+    }
+    const monthlyRate = annualRate / 12 / 100;
+    const interest = principal * monthlyRate * months;
+    const total = principal + interest;
+    document.getElementById('resultM').innerText =
+      `Interest: $${interest.toFixed(2)} | Total: $${total.toFixed(2)}`;
+  }
+
+  function convertToPeso() {
+    const usd = parseFloat(document.getElementById('usdAmount').value);
+    const rate = parseFloat(document.getElementById('exchangeRate').value);
+    if (isNaN(usd) || isNaN(rate) || usd < 0 || rate < 0) {
+      alert('Please fill in all fields with valid positive numbers');
+      return;
+    }
+    const php = usd * rate;
+    document.getElementById('resultPHP').innerText =
+      `$${usd.toFixed(2)} = ₱${php.toFixed(2)}`;
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>2-Product Menu</title>
+  <link rel="stylesheet" href="menu.css">
+</head>
+<body>
+  <h1>Our Coffee Menu</h1>
+  <p style="text-align: center;">Select at least 1 item to checkout</p>
+
+  <div class="buttons">
+    <button class="reset" id="resetBtn">Reset All Items</button>
+    <button class="checkout" id="checkoutBtn" disabled>Checkout</button>
+  </div>
+
+  <div class="menu-container">
+    <div class="card" data-id="1">
+      <a href="second.html/pract2 images/iced-coffee-with-cream-drink.jpg" target="_blank"> 
+        <img src="pract2 images/iced-coffee-with-cream-drink.jpg" alt="Ice coffee" />
+      </a>
+      
+      <div class="card-content">
+        <h3>Ice Coffee</h3>
+        <p> A refreshing range of chilled iced coffees to keep you cool and energized.</p>
+        <div class="price">$8.99</div>
+        <div class="counter">
+          <button class="minus">-</button>
+          <span class="quantity">0</span>
+          <button class="plus">+</button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="card" data-id="2">
+      <img src="pract2 images/mocha.jpg"  alt="Mocha-coffee" />
+      <div class="card-content">
+        <h3>Mocha Coffe</h3>
+        <p>A perfect blend of coffee and chocolate, crafted to satisfy your cravings.
+        </p>
+        <div class="price">$10.99</div>
+        <div class="counter">
+          <button class="minus">-</button>
+          <span class="quantity">0</span>
+          <button class="plus">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-id="3">
+      <img src="pract2 images/capucino.avif" alt="Capuccino" />
+      <div class="card-content">
+        <h3>Cappucino</h3>
+        <p>A rich, frothy cappuccino to lift your mood with every sip</p>
+        <div class="price">$15</div>
+        <div class="counter">
+          <button class="minus">-</button>
+          <span class="quantity">0</span>
+          <button class="plus">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-id="4">
+      <img src="pract2 images/Maciato.jpg" alt="Machiato" />
+      <div class="card-content">
+        <h3>Machiato</h3>
+              <p>
+                Bold espresso with a touch of creamy froth—pure perfection in every sip.
+              </p>
+        <div class="price">$16.50</div>
+        <div class="counter">
+          <button class="minus">-</button>
+          <span class="quantity">0</span>
+          <button class="plus">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-id="5">
+      <img src="pract2 images/flat-white.jpg" alt="Flat White Coffee"/>
+      <div class="card-content">
+        <h3> Flat White Coffee w/ Burger </h3>
+        <p>A creamy and bold Flat White w/ burger, crafted for true coffee lovers.</p>
+        <div class="price">$10</div>
+        <div class="counter">
+          <button class="minus">-</button>
+          <span class="quantity">0</span>
+          <button class="plus">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="card" data-id="6">
+      <img src="pract2 images/amerkano.jpg" alt="Americano Coffee" />
+      <div class="card-content">
+        <h3>Americano Coffee</h3>
+              <p>
+                Bold, smooth, and perfectly balanced—pure espresso softened with hot water.
+              </p>
+        <div class="price">$12</div>
+        <div class="counter">
+          <button class="minus">-</button>
+          <span class="quantity">0</span>
+          <button class="plus">+</button>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  <div class="order-summary">
+    <h2>Your Order</h2>
+    <ul id="orderList"></ul>
+    <p><strong>Total:</strong> $<span id="total">0.00</span></p>
+  </div>
+
+  <div class="center-soon">More flavors brewing soon — stay tuned!....</div>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox">
+    <span class="close">&times;</span>
+    <img class="lightbox-content" id="lightbox-img" src="" alt="Product Image">
+    <div class="caption" id="lightbox-caption"></div>
+  </div>
+
+  <script>
+    const menuData = {
+  1: { name: "Brown Coffee", price: 8.99, quantity: 0 },
+  2: { name: "Ice Coffee", price: 10.99, quantity: 0 },
+  3: { name: "Brown-coffee w/ bread", price: 15, quantity: 0 },
+  4: { name: "Caramel Coffee (Buy 1 Take 1) w/ bread", price: 16.50, quantity: 0 },
+  5: { name: "CHOCO-MILK", price: 10, quantity: 0 },
+  6: { name: "COOKIES & Cream", price: 12, quantity: 0 }
+};
+
+
+    const orderList = document.getElementById('orderList');
+    const totalDisplay = document.getElementById('total');
+    const checkoutBtn = document.getElementById('checkoutBtn');
+    const resetBtn = document.getElementById('resetBtn');
+
+    const cards = document.querySelectorAll('.card');
+
+    cards.forEach(card => {
+      const id = card.getAttribute('data-id');
+      const plus = card.querySelector('.plus');
+      const minus = card.querySelector('.minus');
+      const quantitySpan = card.querySelector('.quantity');
+
+      plus.addEventListener('click', () => {
+        menuData[id].quantity++;
+        quantitySpan.textContent = menuData[id].quantity;
+        updateOrder();
+      });
+
+      minus.addEventListener('click', () => {
+        if (menuData[id].quantity > 0) {
+          menuData[id].quantity--;
+          quantitySpan.textContent = menuData[id].quantity;
+          updateOrder();
+        }
+      });
+    });
+
+    function updateOrder() {
+      orderList.innerHTML = '';
+      let total = 0;
+      let hasItems = false;
+
+      for (const id in menuData) {
+        const item = menuData[id];
+        if (item.quantity > 0) {
+          const li = document.createElement('li');
+          li.textContent = `${item.name} x ${item.quantity} = $${(item.price * item.quantity).toFixed(2)}`;
+          orderList.appendChild(li);
+          total += item.price * item.quantity;
+          hasItems = true;
+        }
+      }
+
+      totalDisplay.textContent = total.toFixed(2);
+      checkoutBtn.disabled = !hasItems;
+    }
+
+    resetBtn.addEventListener('click', () => {
+      for (const id in menuData) {
+        menuData[id].quantity = 0;
+      }
+
+      document.querySelectorAll('.quantity').forEach(q => q.textContent = '0');
+      updateOrder();
+    });
+
+    // ✅ Go to real checkout page and pass data
+    checkoutBtn.addEventListener('click', () => {
+      if (!checkoutBtn.disabled) {
+        localStorage.setItem('orderData', JSON.stringify(menuData));
+        window.location.href = "checkout.html";
+      }
+    });
+
+    // Lightbox JS
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+    const closeLightbox = document.querySelector('.lightbox .close');
+
+    document.querySelectorAll('.card img').forEach(img => {
+      img.addEventListener('click', () => {
+        const card = img.closest('.card');
+        const productName = card.querySelector('h3').textContent;
+
+        lightboxImg.src = img.src;
+        lightboxCaption.textContent = productName;
+        lightbox.style.display = 'block';
+      });
+    });
+
+    closeLightbox.addEventListener('click', () => {
+      lightbox.style.display = 'none';
+    });
+
+    window.addEventListener('click', e => {
+      if (e.target === lightbox) {
+        lightbox.style.display = 'none';
+      }
+    });
+
+  
+  // Parse URL to get item query param (e.g., ?item=ice-coffee)
+  const urlParams = new URLSearchParams(window.location.search);
+  const selectedItem = urlParams.get('item');
+
+  if (selectedItem) {
+    const itemMap = {
+      'ice-coffee': 'Ice Coffee',
+      'mocha': 'Mocha Coffe',
+      'cappuccino': 'Cappucino',
+      'macchiato': 'Machiato',
+      'flat-white': 'Flat White Coffee w/ Burger',
+      'americano': 'Americano Coffee'
+    };
+
+    const targetName = itemMap[selectedItem];
+    if (targetName) {
+      const matchingCard = Array.from(document.querySelectorAll('.card')).find(card => {
+        return card.querySelector('h3')?.textContent.trim() === targetName;
+      });
+
+      if (matchingCard) {
+        const img = matchingCard.querySelector('img');
+        setTimeout(() => {
+          img.click(); // Triggers the lightbox
+        }, 300);
+      }
+    }
+  }
+</script>
+
+</body>
+</html>
